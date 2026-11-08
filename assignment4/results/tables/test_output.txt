@@ -1,0 +1,68 @@
+===== LCS =====
+  PASS  LCS: identical strings, length = length of the string
+  PASS  LCS: completely different strings -> 0
+  PASS  LCS: first string empty -> 0
+  PASS  LCS: second string empty -> 0
+  PASS  LCS: both strings empty -> 0
+  PASS  LCS: ABCBDAB and BDCABA -> 4
+  PASS  LCS: AGGTAB and GXTXAYB -> 4
+  PASS  LCS: a subsequence is not a substring (ACE in ABCDE) -> 3
+  PASS  LCS: restored subsequence has the right length
+  PASS  LCS: restored subsequence is really a subsequence of both strings
+  PASS  LCS: restored subsequence is GTAB
+  PASS  LCS: operations = n*m
+===== Edit distance =====
+  PASS  Edit: identical strings -> 0
+  PASS  Edit: both empty -> 0
+  PASS  Edit: first string empty -> length of the second
+  PASS  Edit: second string empty -> length of the first
+  PASS  Edit: one substitution (cat -> cut) -> 1
+  PASS  Edit: one insertion (cat -> cart) -> 1
+  PASS  Edit: one deletion (cart -> cat) -> 1
+  PASS  Edit: kitten -> sitting -> 3
+  PASS  Edit: flaw -> lawn -> 2
+  PASS  Edit: intention -> execution -> 5
+  PASS  Edit: completely different strings of the same length -> length
+  PASS  Edit: the restored script has exactly 'distance' operations
+  PASS  Edit: operations = n*m
+===== String matching =====
+  PASS  Match: pattern at the beginning -> [0] (Naive == KMP == Rabin-Karp)
+  PASS  Match: pattern in the middle -> [2] (Naive == KMP == Rabin-Karp)
+  PASS  Match: pattern at the end -> [4] (Naive == KMP == Rabin-Karp)
+  PASS  Match: multiple separate occurrences -> [0, 3, 6] (Naive == KMP == Rabin-Karp)
+  PASS  Match: overlapping occurrences -> [0, 1, 2, 3] (Naive == KMP == Rabin-Karp)
+  PASS  Match: overlapping occurrences (ABABA) -> [0, 2] (Naive == KMP == Rabin-Karp)
+  PASS  Match: pattern absent -> [] (Naive == KMP == Rabin-Karp)
+  PASS  Match: pattern almost present -> [3] (Naive == KMP == Rabin-Karp)
+  PASS  Match: pattern longer than the text -> [] (Naive == KMP == Rabin-Karp)
+  PASS  Match: pattern equal to the text -> [0] (Naive == KMP == Rabin-Karp)
+  PASS  Match: one-character pattern -> [0, 3, 5, 7, 10] (Naive == KMP == Rabin-Karp)
+  PASS  Match: empty pattern (assumption: empty result) -> [] (Naive == KMP == Rabin-Karp)
+  PASS  Match: empty text -> [] (Naive == KMP == Rabin-Karp)
+  PASS  Match: empty text and empty pattern -> [] (Naive == KMP == Rabin-Karp)
+  PASS  Match: classic KMP example -> [10] (Naive == KMP == Rabin-Karp)
+  PASS  KMP: lps of AABAACAABAA = [0,1,0,1,2,0,1,2,3,4,5]
+  PASS  KMP: lps of ABCDE = all zeros
+  PASS  KMP: lps of AAAA = [0,1,2,3]
+  PASS  Rabin-Karp with modulus 7 (many collisions) still gives the right answer
+  PASS  Rabin-Karp with modulus 7 really had false positives (collisions)
+  PASS  Rabin-Karp with the big prime has no false positives on this input
+  PASS  KMP on the naive worst case needs at most 2n comparisons
+  PASS  Naive on the same input needs many more comparisons
+===== Kasai (LCP array) =====
+  PASS  Suffix array of banana = [5,3,1,0,4,2]
+  PASS  Kasai: LCP of banana = [0,1,3,0,0,2] (given manually verified SA)
+  PASS  Kasai: needs at most 3n character comparisons (O(n))
+  PASS  Suffix array of mississippi
+  PASS  Kasai: LCP of mississippi = [0,1,1,4,0,0,1,0,2,1,3]
+  PASS  Kasai: single character
+  PASS  Kasai: aaaa -> [0,1,2,3]
+  PASS  Kasai: empty string
+  PASS  Kasai: wrong suffix array length throws an exception
+===== Random cross-checks =====
+  PASS  Random: Naive, KMP and Rabin-Karp agree on 300 random small cases (alphabet AB)
+  PASS  Random: all three agree on 20 texts of length 5000 with many matches
+  PASS  Random: LCS and edit distance properties hold on 200 random pairs
+  PASS  Random: Kasai equals brute-force LCP on 100 random strings
+
+Passed: 61, failed: 0
